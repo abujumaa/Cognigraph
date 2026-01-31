@@ -1,6 +1,6 @@
 # CogniGraph: Enterprise GraphRAG System
 
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/USERNAME/cognigraph)
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/abujumaa/Cognigraph)
 [![Python](https://img.shields.io/badge/python-3.9%2B-blue)](https://www.python.org/)
 [![Docker](https://img.shields.io/badge/docker-required-blue)](https://www.docker.com/)
 
@@ -8,13 +8,17 @@
 
 The system is orchestrated using **LangGraph**, employing a multi-agent architecture to plan, route, and synthesize information dynamically.
 
+## Disclaimer
+**Note:** This project has been extensively validated with the assistance of Artificial Intelligence tools to ensure robustness, reliability, and edge-case coverage.
+
 ---
 
 ## System Architecture
 
 CogniGraph employs a modular, multi-agent architecture. The **Planner** agent analyzes the user's intent to decide whether to use semantic search, graph traversal, or a hybrid approach.
 
-```mermaid
+```
+mermaid
 graph TD
     User[User Client] -->|HTTP Request| API[CogniGraph API]
     API -->|Init State| Planner[Planner Agent]
@@ -43,7 +47,8 @@ graph TD
 
 ### Request Flow (Sequence)
 
-```mermaid
+```
+mermaid
 sequenceDiagram
     participant U as User
     participant A as API Gateway
@@ -217,6 +222,6 @@ PYTHONPATH=. pytest tests
 
 ---
 
-## 📄 License
+## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
