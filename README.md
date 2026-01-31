@@ -10,7 +10,7 @@ The system is orchestrated using **LangGraph**, employing a multi-agent architec
 
 ---
 
-## 🏗️ System Architecture
+## System Architecture
 
 CogniGraph employs a modular, multi-agent architecture. The **Planner** agent analyzes the user's intent to decide whether to use semantic search, graph traversal, or a hybrid approach.
 
@@ -67,7 +67,7 @@ sequenceDiagram
 
 ---
 
-## 🚀 Features
+## Features
 
 *   **Hybrid Search**: Seamlessly blends vector similarity with graph traversal.
 *   **Adaptive Planning**: An LLM-based planner decides the best retrieval strategy for each query.
@@ -80,7 +80,7 @@ sequenceDiagram
 
 ---
 
-## 📂 Directory Structure
+## Directory Structure
 
 ```text
 cognigraph/
@@ -98,7 +98,7 @@ cognigraph/
 
 ---
 
-## 🛠️ Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -158,7 +158,7 @@ curl http://localhost:8080/health
 
 ---
 
-## 📖 Usage Guide
+## Usage Guide
 
 ### Ingesting Data
 
@@ -193,7 +193,7 @@ curl -X POST http://localhost:8080/query \
 
 ---
 
-## 🧪 Testing
+## Testing
 
 Run the test suite to verify the logic:
 
@@ -207,7 +207,7 @@ PYTHONPATH=. pytest tests
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 1.  Fork the repository.
 2.  Create a feature branch (`git checkout -b feature/amazing-feature`).
