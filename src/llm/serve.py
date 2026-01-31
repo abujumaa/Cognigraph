@@ -26,7 +26,7 @@ class VLLMDeployment:
         # return results[0].outputs[0].text
 
         # Mock response for now
-        return f"[VLLM Generated]: Response to '{prompt[:20]}...'
+        return f"[VLLM Generated]: Response to '{prompt[:20]}...'"
 
     async def __call__(self, request: starlette.requests.Request) -> Dict:
         """
