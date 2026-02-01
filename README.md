@@ -11,14 +11,12 @@ The system is orchestrated using **LangGraph**, employing a multi-agent architec
 ## Disclaimer
 **Note:** This project has been extensively validated with the assistance of Artificial Intelligence tools to ensure robustness, reliability, and edge-case coverage.
 
----
 
 ## System Architecture
 
 CogniGraph employs a modular, multi-agent architecture. The **Planner** agent analyzes the user's intent to decide whether to use semantic search, graph traversal, or a hybrid approach.
 
-```
-mermaid
+```mermaid
 graph TD
     User[User Client] -->|HTTP Request| API[CogniGraph API]
     API -->|Init State| Planner[Planner Agent]
@@ -31,7 +29,8 @@ graph TD
         
         Vector --> Synthesizer[Synthesizer Agent]
         Graph --> Synthesizer
-        Hybrid --> Vector & Graph
+        Hybrid --> Vector
+        Hybrid --> Graph
     end
     
     subgraph "Data Layer"
@@ -39,7 +38,7 @@ graph TD
         Graph -.->|Cypher Queries| Neo4j[(Neo4j Graph DB)]
     end
     
-    Synthesizer -->|Context + Prompt| LLM[LLM Service (Ray Serve)]
+    Synthesizer -->|Context + Prompt| LLM["LLM Service (Ray Serve)"]
     LLM -->|Natural Language| Synthesizer
     Synthesizer -->|Final Answer| API
     API -->|JSON Response| User
@@ -47,8 +46,7 @@ graph TD
 
 ### Request Flow (Sequence)
 
-```
-mermaid
+```mermaid
 sequenceDiagram
     participant U as User
     participant A as API Gateway
@@ -62,15 +60,15 @@ sequenceDiagram
     A->>P: Analyze Intent
     P->>P: Determine Strategy (Graph Search)
     P->>G: Generate & Run Cypher Query
-    G-->>P: Return Relationships (Alice)-[MANAGES]->(Project X)
+    G-->>P: Return Relationships (Alice) -[MANAGES]-> (Project X)
     P->>S: Pass Graph Context
     S->>L: Generate Answer using Context
     L-->>S: "Alice is the manager of Project X..."
     S-->>A: Final Response
-    A-->>U: JSON Response
+    A-->>U: JSON Response    
 ```
 
----
+
 
 ## Features
 
@@ -83,7 +81,7 @@ sequenceDiagram
 *   **Secure**: API Key authentication and header-based security.
 *   **Observability**: Detailed logging for debugging and audit trails.
 
----
+
 
 ## Directory Structure
 
@@ -101,7 +99,7 @@ cognigraph/
 └── deploy.sh               # Deployment automation script
 ```
 
----
+
 
 ## Getting Started
 
@@ -161,7 +159,7 @@ curl http://localhost:8080/health
 # {"status": "healthy"}
 ```
 
----
+
 
 ## Usage Guide
 
@@ -196,7 +194,7 @@ curl -X POST http://localhost:8080/query \
 }
 ```
 
----
+
 
 ## Testing
 
@@ -210,7 +208,7 @@ pip install pytest
 PYTHONPATH=. pytest tests
 ```
 
----
+
 
 ## Contributing
 
@@ -220,7 +218,7 @@ PYTHONPATH=. pytest tests
 4.  Push to the branch (`git push origin feature/amazing-feature`).
 5.  Open a Pull Request.
 
----
+
 
 ## License
 
