@@ -3,7 +3,9 @@ from typing import Dict
 import starlette.requests
 import ray
 from ray import serve
+
 # import vllm  # Commented out for dev environments without Linux/GPU
+
 
 @serve.deployment(ray_actor_options={"num_gpus": 1})
 class VLLMDeployment:
@@ -20,7 +22,7 @@ class VLLMDeployment:
         Generates text based on the prompt.
         """
         full_prompt = f"{system_prompt}\n{prompt}" if system_prompt else prompt
-        
+
         # sampling_params = vllm.SamplingParams(temperature=0.7, max_tokens=200)
         # results = await self.engine.generate(full_prompt, sampling_params, request_id="...")
         # return results[0].outputs[0].text
@@ -35,9 +37,10 @@ class VLLMDeployment:
         json_input = await request.json()
         prompt = json_input.get("prompt")
         system_prompt = json_input.get("system_prompt")
-        
+
         output = await self.generate(prompt, system_prompt)
         return {"text": output}
+
 
 # Deployment entry point
 # This binding is what `serve run` looks for.

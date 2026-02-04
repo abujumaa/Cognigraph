@@ -3,10 +3,12 @@ import requests
 import json
 from src.utils.logger import logger
 
+
 class LLMClient:
     """
     Client to interact with the local Ray Serve LLM endpoint.
     """
+
     def __init__(self, base_url: str = None):
         self.base_url = base_url or os.getenv("RAY_SERVE_URL", "http://localhost:8000")
         self.endpoint = f"{self.base_url}/generate"
@@ -20,7 +22,7 @@ class LLMClient:
         payload = {"prompt": prompt}
         if system_prompt:
             payload["system_prompt"] = system_prompt
-        
+
         try:
             # For development/testing without the service running, we can use a mock if connection fails
             # But for "intensive testing", we should try to hit it or mock the network call in tests.
@@ -29,7 +31,9 @@ class LLMClient:
             return response.json().get("text", "")
         except requests.exceptions.ConnectionError:
             # Fallback for dev/test when Docker isn't running
-            logger.warning(f"Could not connect to {self.endpoint}. Returning mock response.")
+            logger.warning(
+                f"Could not connect to {self.endpoint}. Returning mock response."
+            )
             return "This is a mock LLM response because the Ray service is unreachable."
 
     def plan_query(self, query: str) -> str:
@@ -43,6 +47,8 @@ class LLMClient:
         )
         response = self.generate(f"Query: {query}", system_prompt=system_prompt)
         cleaned = response.strip().lower()
-        if "graph" in cleaned: return "graph"
-        if "vector" in cleaned: return "vector"
-        return "hybrid" # Default safe fallback
+        if "graph" in cleaned:
+            return "graph"
+        if "vector" in cleaned:
+            return "vector"
+        return "hybrid"  # Default safe fallback

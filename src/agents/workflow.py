@@ -5,6 +5,7 @@ from src.agents.vector_search import vector_search_node
 from src.agents.graph_search import graph_search_node
 from src.agents.synthesizer import synthesizer_node
 
+
 # Define the routing logic
 def router(state: AgentState):
     plan = state.get("plan", "hybrid")
@@ -14,6 +15,7 @@ def router(state: AgentState):
         return ["graph_search"]
     else:
         return ["vector_search", "graph_search"]
+
 
 # Construct the graph
 workflow = StateGraph(AgentState)
@@ -37,11 +39,11 @@ workflow.add_conditional_edges(
         # For hybrid, we map to both (parallel execution is supported by LangGraph if branching)
         # NOTE: LangGraph API varies; to fan-out, we might need a specific structure or just return list.
         # Assuming the 'router' returns a list of next nodes for parallel execution:
-    }
+    },
 )
 
 # In current LangGraph (0.0.x), conditional edges usually return a single next node or we use a Map step.
-# For simplicity in this scaffold, we will just fan out to both if hybrid, 
+# For simplicity in this scaffold, we will just fan out to both if hybrid,
 # but strictly speaking standard conditional edges direct flow.
 # To achieve parallel fan-out easily:
 # We can make planner go to a 'fork' node or define the edges explicitly.
